@@ -45,3 +45,7 @@ jobs:
       env:
         DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
       run: vendor/bin/phpunit
+    - name: Set default page
+      run: |
+        echo "APP_DEFAULT_ROUTE=accueil" >> .env
+        echo "APP_DEFAULT_CONTROLLER=App\\Controller\\Sae14Controller::index" >> .env
