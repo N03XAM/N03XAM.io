@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %} {% block title %}Formulaire{%
+endblock %} {% block body %}
+<h1>Formulaire</h1>
+<pre>Pour rester au courant, remplissez ce formulaire</pre>
+<form id="monFormulaire">
+  <section class="form">
+    <div class="input-group">
+      <input class="input" required type="text" id="NOM" />
+      <label class="label" for="NOM">NOM</label>
+    </div>
+    <div class="input-group">
+      <input class="input" required type="text" id="Prénom" />
+      <label class="label" for="Prénom">PRENOM</label>
+    </div>
+    <div class="input-group">
+      <input class="input" required type="email" id="Adresse_mail" />
+      <label class="label" for="Adresse_mail">Adresse mail</label>
+    </div>
+    <div class="envoyer">
+      <button class="btn btn-primary" type="submit" id="monBouton">Envoyer et Télécharger</button>
+    </div>
+  </section>
+</form>
+
+<script>
+  document.querySelectorAll(".input").forEach((input) => {
+    input.addEventListener("blur", function () {
+      if (this.value) {
+        this.classList.add("has-content");
+      } else {
+        this.classList.remove("has-content");
+      }
+    });
+  });
+  document
+    .getElementById("monFormulaire")
+    .addEventListener("submit", function (e) {
+      e.preventDefault(); // Empêche l'envoi normal du formulaire
+
+      // Votre code pour traiter les données du formulaire ici
+
+      var lien = document.createElement("a");
+      lien.href = "/CV.pdf";
+      lien.download = "CV.pdf";
+      lien.style.display = "none";
+      document.body.appendChild(lien);
+      lien.click();
+      document.body.removeChild(lien);
+    });
+</script>
+{% endblock %}
