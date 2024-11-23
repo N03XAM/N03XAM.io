@@ -44,3 +44,22 @@ class Sae14Controller extends AbstractController
         ]);
     }
 }
+class SomeController extends Controller {
+    
+    
+    /**
+     * @Route("/speaker/{slug}", name="speaker")
+     */
+    public function speakerAction($slug)
+    {
+        $pagesDirectory = $this->getParameter('kernel.root_dir') . '/Resources/pages/';
+        $speakerInfo = include $pagesDirectory . $slug . '.php';
+        
+        if (empty($speakerInfo)) {
+            throw new NotFoundHttpException;
+        }
+
+        return $this->render('speaker.html.twig', $speakerInfo + ['slug' => $slug]);
+    }
+    
+}
